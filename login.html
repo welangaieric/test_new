@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="expires" content="-1"/>
+    <link rel="stylesheet" href="./bootstrap-icons/bootstrap-icons.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon.png">
+    <link rel="stylesheet" href="./css/main__css.css">
+    <title>KONNEKT Smart Life &vert; Log in</title>
+</head>
+<body>
+    
+    <div class="wrapper">
+        <!-- <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div> -->
+       
+        <header>
+            <div class="glass"></div>
+            <nav>
+                <h1>Konnekt Smart Life</h1>
+            </nav>
+        </header>
+        <div id="positioning"></div>
+        $(if chap-id)
+        <form name="sendin" action="$(link-login-only)" method="post">
+            <input type="hidden" name="username"/>
+            <input type="hidden" name="password"/>
+            <input type="hidden" name="dst" value="$(link-orig)"/>
+            <input type="hidden" name="popup" value="true"/>
+        </form>
+
+        <script src="./md5.js"></script>
+        <script>
+            function doLogin() {
+                document.sendin.username.value = document.login.username.value.toUpperCase().split(' ').join('');
+                document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+                document.sendin.submit();
+                return false;
+            }
+
+        </script>
+        $(endif)
+        <div class="container mt-3" id="dateTime">
+
+        </div>
+ 
+       
+        <div class="container mt-3" id="glass-sec">
+            
+            <div class="glass"></div>
+            <form action="$(link-login-only)" name="login" method="post" id="login" $(if chap-id)
+            onSubmit="return doLogin()"
+            $(endif)>
+            <div class="error-section">
+                <input type="hidden" name="dst" value="$(link-orig)"/>
+                <input type="hidden" name="popup" value="true"/>
+                <p class="info $(if error)alert$(endif)">
+                    $(if error == "")Please log in to use the internet hotspot service $(if trial == 'yes')<br/>Free
+                    trial available, <a class="trial" href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">click
+                    here</a>.$(endif)
+                    $(endif)
+    
+                    $(if error)$(error)$(endif)
+                </p>
+            </div>            
+           <div class="login-section">
+                
+                <div class="input_group user_input">
+                    <div class="user-icon"><i class="bi bi-person-fill"></i></div>
+                    <input name="username" type="text" value="$(username)" class="username" placeholder=" Enter Code"
+                    id="txt-code"/>
+                </div>
+                <div class="input_group hidden">
+                    <input type="password" name="password"hidden value="konnekt">
+                </div>
+                <div class="input_group">
+                    <button type="submit" id="connect">Connect <i class="bi bi-arrow-right-circle"></i></button>
+                    
+                    <!-- <input type="submit" value="Connect" id="connect"> -->
+                </div>
+           </div>
+            
+                
+    
+            </form>
+        </div>
+        <!-- <div class="container mt-3" style="text-align: center;">
+            <p>If you have paid and you have not received a code,<a  id="selfService" style="color:#00ff45;">click Here</a></p>
+        </div>
+        <div class="container mt-3"id="glass-sec2" style="display: none;" >
+            <div class="glass"></div>
+            <form  action="" id="self_service">
+                <div class="input_group">
+                    <input type="text" class="mpesa" name="MpesaReceiptNumber" placeholder=" Enter MpesaCode">
+                </div>
+                <div class="input_group button" >
+                    <input type="submit" id="selfServiceBtn" value="Send">
+
+                </div>
+            </form>
+        </div> -->
+        
+            <div class="container mt-3">
+                <div class="grid">
+                  
+                </div>
+            </div>
+        
+        <div class="profiles-container">
+            <div class="profiles-container-header">
+                <h3>Packages</h3>
+                <i class="bi bi-x-circle" id="closeProfiles"></i>
+            </div>
+            <svg class="view-box" viewBox="0 0 100 20">
+                <defs>
+                  <linearGradient id="gradient">
+                    <stop color="#FFE3BB"/>
+                  </linearGradient>
+                  <pattern id="wave" x="0" y="-0.5" width="100%" height="100%" patternUnits="userSpaceOnUse">
+                    <path id="wavePath" d="M-40 9 Q-30 7 -20 9 T0 9 T20 9 T40 9 T60 9 T80 9 T100 9 T120 9 V20 H-40z" mask="url(#mask)" fill="url(#gradient)"> 
+                    </path>
+                  </pattern>
+                </defs>
+                <text text-anchor="middle" x="50" y="15" font-size="17" fill="#FFE3BB" fill-opacity=".5">KONNEKT</text>
+                <text text-anchor="middle" x="50" y="15" font-size="17" fill="url(#wave)" fill-opacity=".6">KONNEKT</text>
+              </svg>
+            <div class="profiles-container-body" >
+               
+                <span class="loading"></span>
+                
+              
+
+            </div>
+        </div>
+        <div class="container footer">
+            <h5>Contact us:</h5>
+            <div class="contact-info">
+                <p><i class="bi bi-phone"></i>0799-333-639</p>
+                <p><i class="bi bi-whatsapp"></i>0799-333-639</p>
+            </div>
+           
+        </div>
+        <div class="modal" id="payment" aria-hidden="true"  style="display: none;">
+            <div class="modal-body">
+              
+                  <svg class="view-box" viewBox="0 0 100 20">
+                    <defs>
+                      <linearGradient id="gradient">
+                        <stop color="#FFE3BB"/>
+                      </linearGradient>
+                      <pattern id="wave" x="0" y="-0.5" width="100%" height="100%" patternUnits="userSpaceOnUse">
+                        <path id="wavePath" d="M-40 9 Q-30 7 -20 9 T0 9 T20 9 T40 9 T60 9 T80 9 T100 9 T120 9 V20 H-40z" mask="url(#mask)" fill="url(#gradient)"> 
+                        </path>
+                      </pattern>
+                    </defs>
+                    <text text-anchor="middle" x="50" y="15" font-size="17" fill="#FFE3BB" fill-opacity=".5">KONNEKT</text>
+                    <text text-anchor="middle" x="50" y="15" font-size="17" fill="url(#wave)" fill-opacity=".6">KONNEKT</text>
+                  </svg>
+                <form action=""  id="checkout">
+                 <div class="loader3" style="display: none;">
+                    <div class="loader-image">
+                        <img src="./img/loader.gif" alt="">
+                    </div>
+                </div>
+                
+                </form>
+            </div>
+            <div class="cancel mt-3">
+                <button class="cancel-btn">Cancel</button>
+            </div>
+            
+        </div>
+        <div class="wait" style="display: none;">
+            <div class="wlan-search">
+                <div>
+                    <svg class="top" viewBox="0 0 40 40">
+                        <path d="M4,14 C9.33333333,10 14.6666667,8 20,8 C25.3333333,8 30.6666667,10 36,14"></path>
+                    </svg>
+                    <svg class="middle" viewBox="0 0 40 40">
+                        <path d="M9,19 C12.6666667,16.3333333 16.3333333,15 20,15 C23.6666667,15 27.3333333,16.3333333 31,19"></path>
+                    </svg>
+                    <svg class="bottom" viewBox="0 0 40 40">
+                        <path d="M13,24 C15.3333333,22.1666667 17.6666667,21.25 20,21.25 C22.3333333,21.25 24.6666667,22.1666667 27,24"></path>
+                    </svg>
+                </div>
+                
+            </div>
+            <h4>Verifying your payment ...</h4>
+        </div>
+  
+    </div>
+    <aside class="mdc-snackbar">
+        <div class="mdc-snackbar__bg" role="status" aria-relevant="additions">
+            <div class="mdc-snackbar__label" aria-atomic="false">
+                Retry in 5 seconds.
+            </div>
+
+        </div>
+    </aside>
+   
+    
+    <!-- <button id="scrollToTopBtn" onclick="scrollToTop()"><i class="bi bi-arrow-up"></i></button> -->
+    <script src="./bootstrap-icons/bootstrap-icons.json"></script>
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+       
+    
+        // Simulating the insertion of divs at runtime
+       
+    </script>
+    <script src="./js/main.js"></script>
+</body>
+</html>
