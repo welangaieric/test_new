@@ -34,11 +34,12 @@ window.addEventListener('DOMContentLoaded',()=>{
         type:'GET',
         url:`${serverUrl}/api/profiles`,
         success:function(data){
-            
-             
+            let display = $('.grid')
+             display.html('')
             // let result = data.filter(data.name=='UNLIMITED')
             // console.log(data)
-           $('.profiles-container-body').append('<div class="package-container" id="container"></div>')
+            $('.grid-loader').hide()
+
             data.forEach((record)=>{
                 let temp = `
                 <div class="card">
@@ -55,7 +56,7 @@ window.addEventListener('DOMContentLoaded',()=>{
                 </div>
     
                 `
-                let display = $('.grid')
+                
                 
                 display.append(temp)
                 $('.loading').hide()
@@ -234,24 +235,19 @@ window.addEventListener('DOMContentLoaded',()=>{
             
 
             $('.cancel-btn').on('click',()=>{
-                modal.hide()
+                $('#checkout').html('')
+                modal.fadeOut()
             })
         
         },
         error:function(){
             $('.profiles-container-body').append('<div class="package-container" id="container"></div>')
             
-                let temp = `
-                <div class="package">
-                    <p style="font-size: 2rem;">
-                    <i class="bi bi-file-earmark-excel-fill" ></i> 
-                    <p>Our systems are down. Sorry for the inconvinience</p>
-                </p>
-                </div>
-                `
-                let display = $('.package-container')
-                display.append(temp)
-                $('.loading').hide()
+               showSnackbar('Failed to fetch packages')
+               let display = $('.grid')
+               display.html(' <p><i class="bi bi-folder-x"></i> No Packages Found</p>')
+                $('.grid-loader').hide()
+                
             
         }
 
@@ -307,8 +303,9 @@ window.addEventListener('DOMContentLoaded',()=>{
     setTimeout(()=>{   
         $('.wait').hide()
         $('.profiles-container').removeClass('showProf')
+        modal.fadeOut()
         scrollToTop()
-    },3000)
+    },1000)
    }
  
   function scrollToTop(){
