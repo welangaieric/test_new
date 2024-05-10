@@ -245,7 +245,7 @@ window.addEventListener('DOMContentLoaded',()=>{
             
                showSnackbar('Failed to fetch packages')
                let display = $('.grid')
-               display.html(' <p><i class="bi bi-folder-x"></i> No Packages Found</p>')
+               display.html(' <p class="package_notice"><i class="bi bi-folder-x"></i> No Packages Found</p>')
                 $('.grid-loader').hide()
                 
             
