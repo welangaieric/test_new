@@ -1,13 +1,5 @@
 window.addEventListener('DOMContentLoaded',()=>{
-    $('#connect1').on('click',(e)=>{
-        e.preventDefault()
-        $('.profiles-container').addClass('showProf')
-     
-        $('.profiles-container').removeClass('close')
-         // Function to check if the first div is out of view
-         
 
-    })
     $('#connect').on('click',()=>{
         $('#txt-code').split(' ').join('')
     })
@@ -16,11 +8,7 @@ window.addEventListener('DOMContentLoaded',()=>{
         $('.toast').fadeOut()
 
     })
-    $('#closeProfiles').on('click',()=>{
-        $('.profiles-container').removeClass('showProf')
-        $('.profiles-container').addClass('close')
 
-    })
     const modal = $('.modal')
     
     const serverUrl = 'https://www.konnektsmartlife.net'
@@ -241,7 +229,7 @@ window.addEventListener('DOMContentLoaded',()=>{
         
         },
         error:function(){
-            $('.profiles-container-body').append('<div class="package-container" id="container"></div>')
+          
             
                showSnackbar('Failed to fetch packages')
                let display = $('.grid')
@@ -302,7 +290,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     showSnackbar('Processing')
     setTimeout(()=>{   
         $('.wait').hide()
-        $('.profiles-container').removeClass('showProf')
+       
         modal.fadeOut()
         scrollToTop()
     },1000)
