@@ -324,7 +324,24 @@ window.addEventListener('DOMContentLoaded',()=>{
     });
   }
   scrollToTop()
+
+   function showModal(message){
+    var modal_new = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+    modal_new.style.display = "block";
+    $('#notice').html(message)
+    span.onclick = function() {
+     modal_new.style.display = "none";
+    }
   
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal_new) {
+         modal_new.style.display = "none";
+      }
+    }
+   }
+   
   function updateDateTime() {
     var currentDate = new Date();
     var dateString = currentDate.toDateString();
@@ -341,7 +358,8 @@ async function notification(){
             success:function(data){
                 if(data){
                     console.log(data)
-                    showSnackbar(data)
+                    // showSnackbar(data)
+                    showModal(data)
                 }
             }
         })
