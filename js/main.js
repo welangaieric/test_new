@@ -48,6 +48,27 @@ window.addEventListener('DOMContentLoaded',()=>{
                 
                 display.append(temp)
                 $('.loading').hide()
+                // Select all the cards
+                const cards = document.querySelectorAll('.card');
+
+                // Define the Intersection Observer
+                const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    // If the card is intersecting with the viewport, add the animate class
+                    if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    } else {
+                    // If the card is not intersecting, remove the animate class
+                    entry.target.classList.remove('animate');
+                    }
+                });
+                });
+
+                // Observe each card
+                cards.forEach((card) => {
+                observer.observe(card);
+                });
+
             })
             
             
@@ -303,6 +324,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     });
   }
   scrollToTop()
+  
   function updateDateTime() {
     var currentDate = new Date();
     var dateString = currentDate.toDateString();

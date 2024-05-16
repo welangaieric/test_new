@@ -1612,3 +1612,11 @@ svg{font-weight:bold;font-family: 'Cabin Condensed', sans-serif;max-width:100%;h
     transform: translate(40px, 0);
   }
 }
+.card {
+  transform: scale(0);
+  transition: transform .5s ease-in-out;
+}
+
+.card.animate {
+  transform: scale(1);
+}
