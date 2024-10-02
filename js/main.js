@@ -1,18 +1,19 @@
 window.addEventListener('DOMContentLoaded',()=>{
 
-    $('#connect').on('click',()=>{
-        $('#txt-code').split(' ').join('')
-    })
+
     $('.toast').fadeIn()
     $('#close-toast').on('click',()=>{
         $('.toast').fadeOut()
 
     })
+  
 
     const modal = $('.modal')
     
-    const serverUrl = 'https://www.konnektsmartlife.net'
+    const serverUrl = 'https://konnektsmartlife.org'
     const OK = 200;
+    const adminId = 'fuqv8045';
+    const stationID = 0
     let display = $('.package-container')
     $('#selfService').on('click',()=>{
         console.log('ddsdsdsdsd')
@@ -20,7 +21,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     })
     $.ajax({
         type:'GET',
-        url:`${serverUrl}/api/profiles`,
+        url:`${serverUrl}/api/hotspot/profiles/${adminId}`,
         success:function(data){
             let display = $('.grid')
              display.html('')
@@ -84,24 +85,24 @@ window.addEventListener('DOMContentLoaded',()=>{
                 
                 let temp2 = `
                     <legend>Checkout</legend>
-                    <div class="payment-description">
-                        <p class="main"> ${name}</p>
-                        <p><i class="bi bi-hourglass-top"></i><strong>${duration}</strong></p>
-                        <p><i class="bi bi-cash"></i><strong> ${amount} KSH</strong></p>
-                        <p><i class="bi bi-phone"></i><strong> ${devices} DEVICES</strong></p>
-                    </div>
-                    <div class="payment-input-group">
-                        <input type="number" placeholder="Phone Number" name="phone" id="phone" required>
+                   
+                    <div class="input-group">
+                        <input type="number" placeholder="Phone Number" class="form-control" name="phone" id="phone" required>
                         <input type="number" maxLength="10"  hidden name="amount" required value=${amount} >
                         <input type="text" hidden name="value" required value=${JSON.stringify(name)}>
 
 
                     </div>
-                    <div class="payment-input-group">
-                        <input type="submit" value="BUY" id="buy">
+                    <div class="input-group checkout_action">
+                        <input class="btn btn-secondary closebtn" value="Close">
+                        <input type="submit" class="btn" value="Buy" id="buy">
                     </div>
                 `
                 $('#checkout').html(temp2)
+                $('.closebtn').on('click',()=>{
+                    $('#checkout').html('')
+                    modal.fadeOut()
+                })
 
                 const numberRegex = /^\d{10}$/;
                 const phone = $('#phone');
@@ -133,7 +134,7 @@ window.addEventListener('DOMContentLoaded',()=>{
                                 if (!isRequestSent) {
                                 const response = await $.ajax({
                                     type: 'POST',
-                                    url: `${serverUrl}/api/hotspot/send`,
+                                    url: `${serverUrl}/api/hotspot/send/${adminId}`,
                                     data: payload,
                                 });
                         
@@ -158,7 +159,7 @@ window.addEventListener('DOMContentLoaded',()=>{
                                 isRequestSent = false;  // Reset the flag after the request is completed
                             }          
                             async function checkOutIDCheck(checkoutId) {
-                                const pollInterval = 3000; // Poll every 3 seconds (adjust as needed)
+                                const pollInterval = 3000; // Poll every 3 seconds 
                                 const maxAttempts = 10; // Set a maximum number of attempts
                                 let attempts = 0;
                                 let conditionMet = false; // Flag to track whether the condition is met
@@ -167,7 +168,7 @@ window.addEventListener('DOMContentLoaded',()=>{
                                     try {
                                         const response = await $.ajax({
                                             type: 'post',
-                                            url: `${serverUrl}/api/hotspot/check/${checkoutId}`,
+                                            url: `${serverUrl}/api/hotspot/check/${checkoutId}/${adminId}`,
                                         });
                             
                                         if (response.result.ResultCode === '0') {
@@ -243,7 +244,7 @@ window.addEventListener('DOMContentLoaded',()=>{
             })
             
 
-            $('.cancel-btn').on('click',()=>{
+            $('.close').on('click',()=>{
                 $('#checkout').html('')
                 modal.fadeOut()
             })
@@ -342,14 +343,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     }
    }
    
-  function updateDateTime() {
-    var currentDate = new Date();
-    var dateString = currentDate.toDateString();
-    var timeString = currentDate.toLocaleTimeString();
 
-    var dateTimeString = dateString + ' ' + timeString;
-    document.getElementById('dateTime').innerHTML = dateTimeString;
-}
 async function notification(){
     try {
         await $.ajax({
@@ -368,10 +362,6 @@ async function notification(){
     }
 }
 notification()
-// Update the date and time every second
-setInterval(updateDateTime, 1000);
 
-// Initial update
-updateDateTime();
+
 })
-   
